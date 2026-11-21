@@ -15,3 +15,9 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Typecheck, build and test
         run: npm test
+      - name: Save production bundle for browser smoke test
+        uses: actions/upload-artifact@v4
+        with:
+          name: certifyflow-react19-dist
+          path: dist/
+          retention-days: 1
