@@ -1,6 +1,6 @@
 # CertifyFlow (React 19 migration)
 
-A browser-based demonstration of a course certification workflow. This is a modern reconstruction inspired by a collaborative certificate generator developed by Alexander Shotayo and Ian at NCAIR in 2025. The recovered early Tkinter/Pillow project is **not** represented as the current web source, and the original shared code is not published without the contributors’ permission.
+A browser-based demonstration of a course certification workflow. This is a modern reconstruction inspired by a collaborative certificate generator developed by Alexander Shotayo and Benson Abasiekeme Udeme at NCAIR in 2025. The recovered early Tkinter/Pillow project is **not** represented as the current web source, and the original shared code is not published without the contributors’ permission.
 
 ## What it does
 
