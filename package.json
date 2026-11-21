@@ -1,0 +1,10 @@
+{
+  "name": "certifyflow-demo",
+  "private": true,
+  "version": "0.1.1",
+  "description": "Browser-only certificate management portfolio prototype",
+  "scripts": {
+    "test": "node --test tests/test-core.mjs"
+  },
+  "license": "UNLICENSED"
+}
