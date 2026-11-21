@@ -1,89 +1,73 @@
-# CertifyFlow, version 0.1.1
+# CertifyFlow
 
-**A working, browser-only portfolio prototype.** This is a modern reconstruction of the course certification automation project originally developed in 2025 at the National Centre for Artificial Intelligence and Robotics (NCAIR), Abuja, by the project's contributors, including Alexander Shotayo and Ian, another intern.
+**A browser-based certificate automation prototype**
 
-The recovered early Python GUI prototype used **Tkinter**, **Pillow**, a fixed 50% passing mark, and manual form entry to produce certificate images or local retake notices. This new web implementation expands the design with CSV ingestion, bulk certificates, a multi-screen dashboard, student review, and local email drafts. It is a **new reconstruction**, not the untouched original 2025 source.
+CertifyFlow reconstructs and extends a course certification application originally co-developed by Alexander Shotayo and Ian during their 2025 internship at the National Centre for Artificial Intelligence and Robotics (NCAIR), Abuja.
 
-## Run the prototype in 10 seconds
+The recovered early Python prototype used Tkinter and Pillow to generate individual certificates and local retake notices. This new portfolio prototype adds CSV importing, a modern dashboard, bulk PDF generation, student result review, and email draft previews.
 
-1. Extract this ZIP file.
-2. Open **`CertifyFlow_Standalone_Demo.html`** in Chrome, Edge, Firefox, or another current browser.
-3. Click around. Sample fictional student data is already loaded.
-4. Use **Import Students** to upload your own **fictional/test CSV**. You can download a sample CSV in the app.
+This is **not** a commercial product or a production credentialing system. It is an educational portfolio reconstruction developed with AI coding assistance.
 
-The standalone demo bundles its UI libraries and works **offline**. Open the downloaded HTML directly in Chrome or Edge rather than inside a document preview window. It is not hosted anywhere and does not require an account, a server, or a credit card.
+## Try the application
 
-## Features you can test
+1. Download or clone this repository.
+2. Open [`index.html`](index.html) in a current browser such as Chrome or Edge. It is a self-contained offline demo.
+3. Use **Import Students** and choose a CSV file.
+4. Review results, change the passing threshold, download certificates, or preview draft notifications.
 
-- Modern dashboard and responsive layout based on an approved design concept
-- Local CSV upload with drag and drop, an accessible native file selector, and persistent error messages
-- Name, Email, and Score required; Course optional; legacy `MetricNumber` column safely ignored
-- CSV validation: score range, missing fields, email format, duplicate email and course combinations, and row-level errors
-- Editable passing threshold, initially **50%** to match the recovered prototype
-- Student search and pass/retake filters
-- Results export to CSV
-- Personalized PDF certificate download for passing students
-- Bulk export of passing students' certificates as a ZIP of PDFs
-- Personalized pass and retake notification drafts with copy/export options
-- Demo-only activity log; there is **no email sending**, network request, or server-side data storage
+The included [sample_students.csv](sample_students.csv) contains fictional records.
 
-## CSV example
+**Expected CSV columns:** `Name,Email,Course,Score`. `Course` is optional if you provide a default in the import screen. The legacy `Name,MetricNumber,Score,Email` structure is also supported.
 
-```csv
-Name,Email,Course,Score
-Avery Chen,avery.chen@example.com,Python Foundations,91
-Morgan Taylor,morgan.taylor@example.com,Python Foundations,43
+Only CSV files are supported, not Excel spreadsheets. If you have an `.xlsx` file, export it as CSV UTF-8 first. Invalid files produce a visible error message.
+
+## Features in version 0.1.1
+
+- Responsive dashboard, navigation, and course statistics
+- CSV upload and drag-and-drop file import
+- Record validation: missing fields, malformed addresses, scores outside 0 to 100, and duplicates
+- Configurable passing threshold, default 50%, matching the original prototype
+- Student search, outcome filters, and CSV results export
+- Individual PDF certificate generation
+- Bulk ZIP export of certificates for up to 150 successful students
+- Personalized passing and retake email drafts, without real delivery
+- Local processing only: no backend or student record uploads
+
+**Email sending is disabled.** No real messages are sent, and neither uploaded student information nor generated drafts are transmitted to a server. Work is not retained after a browser refresh. Use only fictional or otherwise authorized student records.
+
+## Project files
+
+- [`index.html`](index.html): completely self-contained offline demo, including the interface and browser dependencies
+- [`web/index.html`](web/index.html): equivalent multi-file web entry point
+- [`web/style.css`](web/style.css): UI styles
+- [`web/dist/app.js`](web/dist/app.js): bundled application code, including CSV parsing, workflow logic, PDF generation, and interface
+- [`web/vendor/`](web/vendor): pinned React and ReactDOM browser assets for the current prototype
+- [`tests/test-core.mjs`](tests/test-core.mjs): Node.js tests of the shipped CSV and rules engine
+- [`sample_students.csv`](sample_students.csv): fictional test records
+- [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md): bundled library licenses
+
+The browser application's **compiled JavaScript and CSS** are in this repository. The original TypeScript development workspace from the local project package has not yet been committed in this first GitHub version. The private recovered 2025 Python source is also intentionally excluded pending collaborator review and permission.
+
+## Run tests
+
+With Node.js 18 or newer installed, run:
+
+```bash
+npm test
 ```
 
-Excel workbooks (`.xlsx` and `.xls`) are not accepted directly in this version. Export the relevant worksheet as CSV UTF-8 before importing. If a file is rejected, the Import Students page displays a persistent explanation.
+The suite checks CSV quoted fields, basic imports, invalid records, pass/fail messages, and formula-safe CSV export.
 
-The original recovered CSV had the format `Name,MetricNumber,Score,Email`. This import format is also supported, with the chosen default course added to records without a Course column.
+## Technical notes
 
-## Development and source files
+This prototype uses React with custom CSS and client-side PDF generation. For offline compatibility, the current version bundles **React 16.0.0** and **ReactDOM 16.0.1**. Those versions are obsolete. **Upgrade to a supported React release and a maintained build toolchain before deploying publicly.**
 
-- `index.html`, `style.css`, `dist/app.js`, `vendor/`: self-contained multi-file web version
-- `CertifyFlow_Standalone_Demo.html`: single-file offline demo
-- `src/core.ts`: CSV parsing, validation, sample data, message templates
-- `src/pdf.ts`: client-side certificate PDF and ZIP generation
-- `src/app.tsx`: React interface and app state
-- `tsconfig.json`: TypeScript build configuration
-- `tests/`: core tests and browser integration tests
-- `preview.png`: dashboard screenshot
+The browser app is suitable as a local portfolio demo, not as a secure public certification service. Any future real email integration would require a backend, authenticated operators, authorization, verified sending domain, audit logs, and privacy safeguards.
 
-**Frontend:** React and TypeScript with custom, hand-tuned CSS. This zero-install prototype bundles locally available React 16 UMD assets for offline use. **It is not yet a production build.** Before public deployment, move to a currently supported React release with a conventional Vite build, update the build pipeline, and review dependencies. Tailwind can be introduced during that migration; the current UI's CSS is handcrafted.
+## Credits
 
-If you have Node.js and TypeScript installed, run `npm install` and `npm run build` to rebuild `dist/app.js`. `npm test` runs the small core test suite after the build. The standalone HTML may be regenerated with `python tests/make_standalone.py`.
+The original NCAIR certificate automation project was collaboratively developed by Alexander Shotayo and Ian in 2025. This repository contains a **2026 reconstruction and enhancement** informed by the original workflow, with AI-assisted implementation.
 
-## Technical boundaries
+No real student data or unlicensed third-party certificate artwork is intentionally included.
 
-- No genuine email delivery, accounts, databases, persistence, or role-based access control
-- Neither student records nor email drafts are uploaded to any backend
-- Uploaded data and activity history disappear when you refresh the browser tab
-- PDF certificates contain on-screen student/course text and an issuance date; they are **sample certificates** and do not verify course completion independently
-- Up to 5,000 CSV records per import (file limit 2 MB); bulk ZIP generation is limited to 150 PDFs for browser memory safety
-- No third-party certificate templates or original student records are included in this prototype
-
-Do not use this demonstration to send official academic results or certificates. Real email delivery will require a secure backend, identity/access controls, delivery logging, domain verification, clear consent, and protection of personal information.
-
-## Credits and provenance
-
-This application reconstructs and extends an internship project originally co-developed by **Alexander Shotayo and Ian** at **NCAIR, Abuja, in 2025**. The privately recovered Python script and associated archive were used solely as references for the original pass/fail and certificate logic; they are not bundled in this public-ready prototype. This prototype was developed with AI coding assistance and should be represented as such when describing its 2026 reconstruction.
-
-Do not publicly publish the original recovered code, personal records, or certificate art without confirming collaborator permission and asset rights.
-
-## Development status
-
-- [x] Design approved
-- [x] Working dashboard and navigation
-- [x] CSV import, validation and threshold logic
-- [x] Personalized PDF generation and bulk ZIP
-- [x] Notification drafts with no delivery
-- [x] Basic automated tests and manual browser workflow checks
-- [ ] Upgrade to supported React version and modern build system
-- [ ] Accessibility and browser compatibility review
-- [ ] Real email service integration and production security review
-- [ ] Deploy to free static hosting
-
-**Version 0.1.1 fix:** Verified the upload button and native file input in a browser using both the sample CSV and the recovered original CSV format; verified persistent errors for Excel files and incorrect headers.
-
-**Demo data is fictional. The project has not been deployed.**
+**Current status:** Functional private portfolio prototype. Not publicly hosted or connected to an email sender.
