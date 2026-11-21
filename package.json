@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "build": "npm run typecheck && vite build",
     "preview": "vite preview",
-    "test": "npm run build && node --test tests/core.test.mjs"
+    "test": "npm run build && npm run test:core",
+    "test:core": "tsc src/core.ts --target ES2022 --module ESNext --outDir .test-dist --skipLibCheck && node --test tests/core.behavior.test.mjs"
   },
   "dependencies": {
     "react": "19.3.1",

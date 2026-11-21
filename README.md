@@ -36,6 +36,8 @@ The production build appears in `dist/` and can be deployed to a static hosting 
 
 React 19 + TypeScript + Vite + custom CSS. The core CSV functions are kept separate from the interface; certificate and ZIP creation happen in-browser. There is no authentication or server-side processing.
 
+The `npm run test:core` task runs behavior tests against the actual CSV processing and pass/fail logic.
+
 ## Safety and provenance
 
 **Use sample or fictional data only.** Do not upload real student or institutional records to a publicly shared demo. The app produces demonstration certificates, not official credentials. The `send emails` control remains disabled.
