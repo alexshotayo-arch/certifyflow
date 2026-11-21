@@ -1,0 +1,15 @@
+{
+  "name": "certifyflow-portfolio-prototype",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Browser-only course certification prototype inspired by a 2025 collaborative internship project",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "test": "npm run build && tsc src/core.ts --target ES2020 --module none --outFile dist/core-test.js && node tests/test-core.js"
+  },
+  "license": "UNLICENSED",
+  "notes": "Build uses TypeScript and local React UMD assets with zero package installation. Node and TypeScript are required only to rebuild source.",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

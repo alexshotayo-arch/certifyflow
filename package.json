@@ -1,10 +1,26 @@
 {
-  "name": "certifyflow-demo",
+  "name": "certifyflow",
   "private": true,
-  "version": "0.1.1",
-  "description": "Browser-only certificate management portfolio prototype",
+  "version": "0.2.0",
+  "type": "module",
+  "description": "CertifyFlow course certificate generation portfolio demo",
   "scripts": {
-    "test": "node --test tests/test-core.mjs"
+    "dev": "vite",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview",
+    "test": "npm run build && npm run test:core",
+    "test:core": "tsc src/core.ts --target ES2022 --module ESNext --outDir .test-dist --skipLibCheck && node --test tests/core.behavior.test.mjs"
   },
-  "license": "UNLICENSED"
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.8"
+  }
 }
